@@ -12,8 +12,8 @@ void main() {
   ));
 }
 
-String clientId = 'YOUR_CLIENT_ID';
-String secretKey = 'YOUR_SECRET_KEY';
+String clientId = '';
+String secretKey = '';
 
 
 class MyApp extends StatefulWidget {
@@ -136,14 +136,17 @@ class _MyAppState extends State<MyApp> {
         ],
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
+          await Future.delayed(Duration(seconds: 2));
           _showAlertDialog(context, 'Success');
           print("onSuccess: $params");
         },
-        onError: (error) {
+        onError: (error) async {
+          await Future.delayed(Duration(seconds: 2));
           _showAlertDialog(context, 'Error: $error');
           print("onError: $error");
         },
-        onCancel: () {
+        onCancel: () async {
+          await Future.delayed(Duration(seconds: 2));
           _showAlertDialog(context, 'Cancelled');
           print('cancelled:');
         },
@@ -193,14 +196,20 @@ class _MyAppState extends State<MyApp> {
             ],
             note: "Contact us for any questions on your order.",
           onSuccess: (Map params) async {
+            Navigator.pop(context);
+            await Future.delayed(Duration(seconds: 2));
             _showAlertDialog(context, 'Success');
             print("onSuccess: $params");
           },
-          onError: (error) {
+          onError: (error) async {
+            Navigator.pop(context);
+            await Future.delayed(Duration(seconds: 2));
             _showAlertDialog(context, 'Error: $error');
             print("onError: $error");
           },
-          onCancel: () {
+          onCancel: () async {
+            Navigator.pop(context);
+            await Future.delayed(Duration(seconds: 2));
             _showAlertDialog(context, 'Cancelled');
             print('cancelled:');
           },
